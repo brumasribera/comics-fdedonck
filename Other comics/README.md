@@ -1,6 +1,12 @@
 # Other comics
 These are little comics I made to empty my head. (You can download the pngs of these in different languages.)
 
+## Another one breathes the dust
+Created for an op-ed for [REVOLVE](https://revolve.media), inspired by [work at 6-t bureau d'étude](https://www.6-t.co/etudes/precarite-et-mobilite-automobile-dans-le-canton-de-geneve-indicateurs-cles-et-enjeux). In Geneva, wealthier residents travel long distances in large cars, mostly for leisure, generating the greatest share of emissions. By contrast, poorer households often drive older, more polluting vehicles, but their trips are short and tied to necessity. Despite contributing less overall, they are the ones most exposed to the noise, fumes, and fine particles of traffic.
+![Another One Breathes The Dust](Typed_PrecariteAutomobile.png)
+
+![Another One Breathes The Dust](Handwritten_PrecariteAutomobile.png)
+
 ## Summer Palimpsest
 Written in summer in Geneva, overflowing with feelings and trying to go with the flow while everyone else seems to have their life figured out.
 ![Summer Palimpsest](SummerPalimpsest-ENG.png)
