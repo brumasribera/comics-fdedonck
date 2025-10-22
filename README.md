@@ -19,7 +19,7 @@ Borrowed Shade: Urban heat islands and social inequalities.
 
 | Preview | Preview |
 |:--:|:--:|
-| <img src="Figure%201A%202025/SilentRobber_lowres.png" width="300"> | <img src="Figure%201A%202025/BorrowedShade_lowres.png" width="300"> |
+| <img src="Figure%201A%202025/SilentRobber_lowres.jpg" width="300"> | <img src="Figure%201A%202025/BorrowedShade_lowres.jpg" width="300"> |
 
 ---
 
@@ -32,7 +32,7 @@ A series of short comics from my travels without taking the airplane.
 
 ---
 
-### [**OtherComics**](./Other%20Comics)
+### [**OtherComics**](./Other%20comics)
 A collection of standalone stories.  
 
 - **REVOLVE**: social inequalities in car-related emissions and vulnerabilities in Geneva  
@@ -43,7 +43,7 @@ A collection of standalone stories.
 
 | Preview |
 |:--:|
-| <img src="Other%20Comics/6t_REVOLVE.png" width="300"> |
+| <img src="Other%20comics/6t_REVOLVE.png" width="300"> |
 
 ---
 
