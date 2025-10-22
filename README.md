@@ -7,7 +7,10 @@ Please ask me before sharing these elsewhere.
 📩 Contact: fien.a.c.de.doncker[at]gmail.com  
 
 
-You can click on the sub-folders to discover the different comics and to download them.
+You can click on the sub-folders (blue titles below) to discover the different comics and to download them.
+
+
+
 ---
 
 ## Explore the collections
@@ -17,7 +20,7 @@ You can click on the sub-folders to discover the different comics and to downloa
 Silent Robber: Visual reflections on glacial erosion, landscapes, and the stories hidden beneath the ice.  
 Borrowed Shade: Urban heat islands and social inequalities.
 
-| Preview | Preview |
+|Silent Robber | Borrowed Shade |
 |:--:|:--:|
 | <img src="Figure%201A%202025/SilentRobber_lowres.jpg" width="300"> | <img src="Figure%201A%202025/BorrowedShade_lowres.jpg" width="300"> |
 
@@ -26,7 +29,7 @@ Borrowed Shade: Urban heat islands and social inequalities.
 ### [**No Plane Adventures**](./No%20Plane%20Adventures)
 A series of short comics from my travels without taking the airplane.  
 
-| Preview |
+| Preview Morocco |
 |:--:|
 | <img src="No%20Plane%20Adventures/maroc_ENG.png" width="300"> |
 
@@ -35,13 +38,13 @@ A series of short comics from my travels without taking the airplane.
 ### [**OtherComics**](./Other%20comics)
 A collection of standalone stories.  
 
-- **REVOLVE**: social inequalities in car-related emissions and vulnerabilities in Geneva  
+- **Another one breathes the dust**: op-ed for REVOLVE - social inequalities in car-related emissions and vulnerabilities in Geneva  
 - **Summer Palimpsest**: overflowing with emotions 
 - **When the pain takes over**: introspection and resilience  
 - **al-Ard (فلسطين)**: reflections on land, loss, and solidarity  
 - **Line 3 replacement**: a story of water protectors and care for Earth  
 
-| Preview |
+| Another one breathes the dust|
 |:--:|
 | <img src="Other%20comics/6t_REVOLVE.png" width="300"> |
 
