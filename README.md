@@ -38,21 +38,22 @@ A series of short comics from my travels without taking the airplane.
 ### [**OtherComics**](./Other%20comics)
 A collection of standalone stories.  
 
+- **Othering**: comic inspired by the Border Forensics report on the structural inequalities behind swiss police-related deaths
 - **Another one breathes the dust**: op-ed for REVOLVE - social inequalities in car-related emissions and vulnerabilities in Geneva  
 - **Summer Palimpsest**: overflowing with emotions 
 - **When the pain takes over**: introspection and resilience  
 - **al-Ard (فلسطين)**: reflections on land, loss, and solidarity  
 - **Line 3 replacement**: a story of water protectors and care for Earth  
 
-| Another one breathes the dust|
-|:--:|
-| <img src="Other%20comics/6t_REVOLVE.png" width="300"> |
+|Othering | Another one breathes the dust |
+|:--:|:--:|
+| <img src="Other%20comics/BF_Nzoy.png" width="300"> | <img src="Other%20comics/6t_REVOLVE.png" width="300"> |
 
 ---
 
 ## About this repository
 This portfolio is a growing collection of my comics at the intersection of science, art, and storytelling.  
-Each piece aims to make the invisible visible, from glacial landscapes to inner emotional terrains.  
+Each piece aims to make the invisible visible.  
 
 Feel free to browse the folders above or download individual comics for personal reading.  
 If you’d like to collaborate or feature my work, please get in touch.
