@@ -1,0 +1,42 @@
+.collections {
+  background: #ffffff;
+}
+
+.collections-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.collections-header h2 {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.collections-header p {
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  .collections-header h2 {
+    font-size: 2rem;
+  }
+
+  .collections-header p {
+    font-size: 1rem;
+  }
+
+  .collections-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
