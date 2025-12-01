@@ -9,6 +9,9 @@ build/
 .vite/
 .next/
 
+# Comic Portfolio Site (separate Vite project)
+Comic Portfolio Site/
+
 # Environment variables
 .env
 .env.local
