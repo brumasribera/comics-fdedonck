@@ -23,7 +23,7 @@ export default function Hero() {
         <button 
           className="cta-button"
           onClick={() => {
-            document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })
+            document.getElementById('figure1a')?.scrollIntoView({ behavior: 'smooth' })
           }}
         >
           Explore Collections

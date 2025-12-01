@@ -1,14 +1,20 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import './Lightbox.css'
 
 export default function Lightbox({ imageSrc, title, onClose }) {
+  const [isZoomed, setIsZoomed] = useState(false)
+
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
-        onClose()
+        if (isZoomed) {
+          setIsZoomed(false)
+        } else {
+          onClose()
+        }
       }
     }
     document.addEventListener('keydown', handleEscape)
@@ -18,19 +24,27 @@ export default function Lightbox({ imageSrc, title, onClose }) {
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = 'unset'
     }
-  }, [onClose])
+  }, [onClose, isZoomed])
+
+  const handleImageClick = () => {
+    setIsZoomed(!isZoomed)
+  }
 
   return (
     <div className="lightbox" onClick={onClose}>
       <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
         <button className="lightbox-close" onClick={onClose}>×</button>
-        {title && <h3 className="lightbox-title">{title}</h3>}
-        <div className="lightbox-image-container">
+        {title && !isZoomed && <h3 className="lightbox-title">{title}</h3>}
+        <div 
+          className={`lightbox-image-container ${isZoomed ? 'zoomed' : ''}`}
+          onClick={handleImageClick}
+        >
           <Image 
             src={imageSrc} 
             alt={title || 'Comic'} 
             width={1200}
             height={1600}
+            className={isZoomed ? 'zoomed' : ''}
             style={{ 
               maxWidth: '100%', 
               height: 'auto',

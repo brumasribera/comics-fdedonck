@@ -1,12 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import CollectionCard from './CollectionCard'
+import Image from 'next/image'
 import './Collections.css'
 
 export default function Collections({ openLightbox }) {
-  const [activeCollection, setActiveCollection] = useState(null)
-
   const collections = [
     {
       id: 'figure1a',
@@ -120,6 +117,61 @@ export default function Collections({ openLightbox }) {
     }
   ]
 
+  const renderCollection = (collection) => {
+    const isCompact = collection.id === 'figure1a' || collection.id === 'noplane'
+
+    return (
+      <div key={collection.id} id={collection.id} className="collection-full-width">
+        <div className={`collection-panel ${isCompact ? 'compact' : ''}`}>
+          <div className="collection-panel-header">
+            <div className="collection-title-section">
+              <h3>{collection.title}</h3>
+              <p className="collection-subtitle">{collection.subtitle}</p>
+            </div>
+          </div>
+          
+          <div className="collection-panel-content">
+            <p className="collection-description">{collection.description}</p>
+            
+            <div className="comics-grid">
+              {collection.items.map((item, index) => (
+                <div 
+                  key={index} 
+                  className="comic-card"
+                  onClick={() => openLightbox(item.fullImage, item.title)}
+                >
+                  <div className="comic-image-container">
+                    <Image 
+                      src={item.image} 
+                      alt={item.title}
+                      fill
+                      style={{ objectFit: 'cover', pointerEvents: 'none' }}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      unoptimized
+                    />
+                    <div 
+                      className="comic-overlay"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        openLightbox(item.fullImage, item.title)
+                      }}
+                    >
+                      <span className="view-text">View Full</span>
+                    </div>
+                  </div>
+                  <div className="comic-card-info">
+                    <h4>{item.title}</h4>
+                    <p>{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <section id="collections" className="collections">
       <div className="collections-header">
@@ -127,20 +179,9 @@ export default function Collections({ openLightbox }) {
         <p>Browse through different series and standalone works</p>
       </div>
 
-      <div className="collections-grid">
-        {collections.map((collection) => (
-          <CollectionCard
-            key={collection.id}
-            collection={collection}
-            isActive={activeCollection === collection.id}
-            onToggle={() => setActiveCollection(
-              activeCollection === collection.id ? null : collection.id
-            )}
-            openLightbox={openLightbox}
-          />
-        ))}
+      <div className="collections-container">
+        {collections.map((collection) => renderCollection(collection))}
       </div>
     </section>
   )
 }
-

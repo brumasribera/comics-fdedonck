@@ -1,42 +1,441 @@
 .collections {
-  background: #ffffff;
+  background: var(--bg-color);
+  padding: 100px 60px;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .collections-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
 }
 
 .collections-header h2 {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
   color: var(--primary-color);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
 .collections-header p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--text-light);
+  font-weight: 300;
+  letter-spacing: 0.01em;
 }
 
-.collections-grid {
+.collections-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.collection-full-width {
+  width: 100%;
+}
+
+.collection-panel {
+  background: transparent;
+}
+
+.collection-panel-header {
+  padding: 40px 0 20px 0;
+  background: transparent;
+  position: relative;
+}
+
+.collection-panel.compact .collection-panel-header {
+  padding: 20px 0 12px 0;
+}
+
+.collection-title-section {
+  flex: 1;
+}
+
+.collection-title-section h3 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  color: var(--primary-color);
+  line-height: 1.3;
+  transition: font-size 0.3s ease, margin-bottom 0.3s ease;
+}
+
+.collection-panel.compact .collection-title-section h3 {
+  font-size: 2rem;
+  margin-bottom: 3px;
+}
+
+.collection-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  margin: 0;
+  line-height: 1.4;
+  font-style: normal;
+}
+
+.collection-panel.compact .collection-subtitle {
+  font-size: 0.75rem;
+}
+
+.collection-panel-content {
+  padding: 0 0 40px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.collection-panel.compact .collection-panel-content {
+  padding: 0 0 25px 0;
+}
+
+
+.collection-description {
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  max-width: 800px;
+}
+
+.collection-panel.compact .collection-description {
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+}
+
+.comics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
-  margin-top: 60px;
+  gap: 15px;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
+.collection-panel.compact .comics-grid {
+  gap: 12px;
+}
+
+/* Responsive grid based on number of items */
+.comics-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.collection-full-width:nth-child(1) .comics-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.collection-full-width:nth-child(2) .comics-grid {
+  grid-template-columns: 1fr;
+  max-width: 600px;
+}
+
+.collection-full-width:nth-child(3) .comics-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.collection-full-width:nth-child(4) .comics-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.comic-card {
+  background: transparent;
+  border-radius: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.comic-card:hover {
+  opacity: 0.85;
+}
+
+.comic-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+.collection-full-width:nth-child(1) .comic-image-container {
+  padding-top: 70%;
+}
+
+.collection-full-width:nth-child(2) .comic-image-container {
+  padding-top: 70%;
+}
+
+.collection-full-width:nth-child(4) .comic-image-container {
+  padding-top: 160%;
+}
+
+html.dark .comic-image-container {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+}
+
+.comic-image-container img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.comic-card:hover .comic-image-container img {
+  transform: scale(1.08);
+}
+
+.comic-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.comic-card:hover .comic-overlay {
+  opacity: 1;
+}
+
+.view-text {
+  color: white;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 12px 24px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.comic-card:hover .view-text {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.comic-card-info {
+  padding: 12px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.comic-card-info h4 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--primary-color);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.comic-card-info p {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .collections {
+    padding: 100px 40px;
+  }
+
+  .collection-panel-header {
+    padding: 36px 0 18px 0;
+  }
+
+  .collection-panel.compact .collection-panel-header {
+    padding: 18px 0 10px 0;
+  }
+
+  .collection-panel-content {
+    padding: 0 0 50px 0;
+  }
+
+  .collection-title-section h3 {
+    font-size: 2.25rem;
+  }
+
+  .collection-panel.compact .collection-title-section h3 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .collections {
+    padding: 80px 30px;
+  }
+
+  .collections-header {
+    margin-bottom: 60px;
+  }
+
   .collections-header h2 {
+    font-size: 2.75rem;
+  }
+
+  .collections-container {
+    gap: 50px;
+  }
+
+  .collection-panel-header {
+    padding: 32px 0 16px 0;
+  }
+
+  .collection-panel.compact .collection-panel-header {
+    padding: 16px 0 10px 0;
+  }
+
+  .collection-panel-content {
+    padding: 0 0 40px 0;
+  }
+
+  .collection-title-section h3 {
     font-size: 2rem;
   }
 
-  .collections-header p {
-    font-size: 1rem;
+  .collection-panel.compact .collection-title-section h3 {
+    font-size: 1.6rem;
   }
 
-  .collections-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  .collection-description {
+    font-size: 1.05rem;
+  }
+
+  .collection-full-width:nth-child(1) .comics-grid,
+  .collection-full-width:nth-child(3) .comics-grid,
+  .collection-full-width:nth-child(4) .comics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }
 
+@media (max-width: 768px) {
+  .collections {
+    padding: 60px 20px;
+  }
+
+  .collections-header {
+    margin-bottom: 50px;
+  }
+
+  .collections-header h2 {
+    font-size: 2.25rem;
+  }
+
+  .collections-header p {
+    font-size: 1.1rem;
+  }
+
+  .collections-container {
+    gap: 40px;
+  }
+
+  .collection-panel-header {
+    padding: 28px 0 16px 0;
+  }
+
+  .collection-panel.compact .collection-panel-header {
+    padding: 14px 0 10px 0;
+  }
+
+  .collection-panel-content {
+    padding: 0 0 32px 0;
+  }
+
+  .collection-title-section h3 {
+    font-size: 1.75rem;
+  }
+
+  .collection-panel.compact .collection-title-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .collection-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .collection-description {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .comics-grid {
+    gap: 12px;
+  }
+
+  .collection-full-width:nth-child(1) .comics-grid,
+  .collection-full-width:nth-child(3) .comics-grid,
+  .collection-full-width:nth-child(4) .comics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comic-card-info {
+    padding: 20px;
+  }
+
+  .comic-card-info h4 {
+    font-size: 1.1rem;
+  }
+
+  .comic-card-info p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .collections {
+    padding: 60px 20px;
+  }
+
+  .collections-header h2 {
+    font-size: 1.875rem;
+  }
+
+  .collection-title-section h3 {
+    font-size: 1.6rem;
+  }
+
+  .collection-panel.compact .collection-title-section h3 {
+    font-size: 1.4rem;
+  }
+
+  .collection-panel.collapsible.collapsed .collection-title-section h3 {
+    font-size: 1.4rem;
+  }
+
+  .collection-panel-header {
+    padding: 24px 0 14px 0;
+  }
+
+  .collection-panel.collapsible.collapsed .collection-panel-header {
+    padding: 24px 0 14px 0;
+  }
+
+  .collection-panel-content {
+    padding: 0 0 28px 0;
+  }
+}

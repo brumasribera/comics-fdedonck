@@ -3,6 +3,9 @@ import './globals.css'
 export const metadata = {
   title: 'Fien De Doncker - Comics Portfolio',
   description: 'Science, art, and storytelling comics at the intersection of research, art, and social justice.',
+  icons: {
+    icon: '/favicon.png'
+  }
 }
 
 export default function RootLayout({ children }) {

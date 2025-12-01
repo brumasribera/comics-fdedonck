@@ -1,10 +1,13 @@
 .collection-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
   box-shadow: var(--shadow);
   overflow: hidden;
   transition: all 0.3s ease;
   border: 1px solid var(--border-color);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .collection-card:hover {
@@ -13,7 +16,7 @@
 }
 
 .collection-header {
-  padding: 30px;
+  padding: 25px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,6 +26,10 @@
 
 .collection-header:hover {
   background: var(--secondary-color);
+}
+
+html.dark .collection-header:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .collection-header h3 {
@@ -52,6 +59,11 @@
 .toggle-button:hover {
   background: rgba(0, 0, 0, 0.05);
   color: var(--primary-color);
+}
+
+html.dark .toggle-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent-color);
 }
 
 .arrow {
@@ -93,7 +105,7 @@
 }
 
 .comic-item {
-  background: var(--secondary-color);
+  background: var(--bg-secondary);
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -151,7 +163,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e0e0e0;
+  background: var(--bg-secondary);
   color: var(--text-light);
 }
 
