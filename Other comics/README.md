@@ -15,6 +15,9 @@ Border Forensics. (2025). The death of Roger Nzoy Wilhelm. Retrieved November 4,
 Translated with DeepL.com (free version)
 ## Another one breathes the dust
 Created for an op-ed for [REVOLVE](https://revolve.media), inspired by [work at 6-t bureau d'étude](https://www.6-t.co/etudes/precarite-et-mobilite-automobile-dans-le-canton-de-geneve-indicateurs-cles-et-enjeux). In Geneva, wealthier residents travel long distances in large cars, mostly for leisure, generating the greatest share of emissions. By contrast, poorer households often drive older, more polluting vehicles, but their trips are short and tied to necessity. Despite contributing less overall, they are the ones most exposed to the noise, fumes, and fine particles of traffic.
+
+Read the op-ed here: https://revolve.media/opinions/genevas-air-inequality-who-breathes-the-dust
+
 ![Another One Breathes The Dust](6t_REVOLVE.png)
 
 ## Summer Palimpsest
