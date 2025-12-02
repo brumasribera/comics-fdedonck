@@ -1,13 +1,18 @@
 import { createSharePreviewImage } from '@/utils/sharePreviewImage';
 
 export const runtime = 'edge';
-export const size = {
+
+const size = {
   width: 1200,
   height: 630,
 };
-export const contentType = 'image/png';
+
+const contentType = 'image/png';
+
 export async function GET() {
-  return createSharePreviewImage(size);
+  const image = await createSharePreviewImage(size);
+  image.headers.set('content-type', contentType);
+  return image;
 }
 
 

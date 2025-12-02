@@ -1,3 +1,4 @@
+import React from 'react';
 import { ImageResponse } from 'next/og';
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
@@ -45,10 +46,10 @@ export async function createSharePreviewImage(size: SharePreviewSize) {
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              "linear-gradient(120deg, rgba(3,3,3,0.95) 15%, rgba(13,13,13,0.8) 50%, rgba(3,3,3,0.95) 85%), url('https://comics-fdedonck.vercel.app/Figure%201A%202025/BorrowedShade_lowres.jpg')",
+              'linear-gradient(120deg, rgba(3,3,3,0.95) 15%, rgba(13,13,13,0.8) 50%, rgba(3,3,3,0.95) 85%)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'saturate(110%) brightness(0.7)',
+            filter: 'saturate(110%) brightness(0.9)',
           }}
         />
         <div
@@ -65,6 +66,7 @@ export async function createSharePreviewImage(size: SharePreviewSize) {
             position: 'absolute',
             inset: 0,
             opacity: 0.7,
+            display: 'flex',
           }}
         >
           <div
