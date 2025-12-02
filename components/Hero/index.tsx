@@ -24,10 +24,12 @@ export default function Hero() {
             Science · Art · Storytelling
           </p>
           <h1 className={styles.title}>Fien De Doncker</h1>
-          <p className={styles.subtitle}>Comics translating research into stories that can be felt.</p>
+          <p className={styles.subtitle}>
+            Comics turning research into felt stories where field notes, data, and lived realities make climate justice
+            visceral.
+          </p>
           <p className={styles.description}>
-            Fieldwork notes, climate data, and lived experience meet visual storytelling to make complex issues tangible
-            and galvanize action for climate and social justice.
+            <span className={styles.mantraLine}>Art touches, science enlightens, together they can lead to action.</span>
           </p>
 
           <div className={styles.actions}>

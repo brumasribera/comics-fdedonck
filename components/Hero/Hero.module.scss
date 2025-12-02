@@ -85,6 +85,27 @@
   line-height: 1.9;
   color: rgba(255, 255, 255, 0.85);
   max-width: 560px;
+
+  .mantraLine {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 18px;
+    padding: 6px 0;
+    font-size: 0.95rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+
+    &::before {
+      content: '';
+      width: 54px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-color, #ffba08));
+    }
+  }
 }
 
 .actions {
