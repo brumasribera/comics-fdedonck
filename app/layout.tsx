@@ -3,12 +3,42 @@ import type { ReactNode } from 'react';
 
 import './globals.css';
 
-export const metadata: Metadata = {
+const siteMetadata = {
   title: 'Fien De Doncker - Comics Portfolio',
   description:
     'Science, art, and storytelling comics at the intersection of research, art, and social justice.',
+  url: 'https://comics-fdedonck.vercel.app',
+  imageAlt: 'Fien De Doncker — Comics portfolio share preview',
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteMetadata.url),
+  title: siteMetadata.title,
+  description: siteMetadata.description,
   icons: {
     icon: '/favicon.png',
+  },
+  openGraph: {
+    type: 'website',
+    url: siteMetadata.url,
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    siteName: 'Fien De Doncker',
+    locale: 'en_US',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: siteMetadata.imageAlt,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: ['/twitter-image'],
   },
 };
 
