@@ -1,4 +1,4 @@
-.collection-card {
+.card {
   background: var(--card-bg);
   border-radius: 12px;
   box-shadow: var(--shadow);
@@ -8,43 +8,45 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  &:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+  }
 }
 
-.collection-card:hover {
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-4px);
-}
-
-.collection-header {
+.header {
   padding: 25px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   transition: background 0.3s ease;
+
+  &:hover {
+    background: var(--secondary-color);
+  }
+
+  html.dark & {
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+  }
 }
 
-.collection-header:hover {
-  background: var(--secondary-color);
-}
-
-html.dark .collection-header:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.collection-header h3 {
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  margin-bottom: 8px;
-}
-
-.collection-subtitle {
+.subtitle {
   color: var(--text-light);
   font-size: 0.95rem;
   font-style: italic;
 }
 
-.toggle-button {
+.toggleButton {
   font-size: 1.2rem;
   color: var(--text-light);
   transition: all 0.3s ease;
@@ -54,16 +56,18 @@ html.dark .collection-header:hover {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-}
 
-.toggle-button:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--primary-color);
-}
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+  }
 
-html.dark .toggle-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--accent-color);
+  html.dark & {
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--accent-color);
+    }
+  }
 }
 
 .arrow {
@@ -71,69 +75,70 @@ html.dark .toggle-button:hover {
   transition: transform 0.3s ease;
 }
 
-.arrow.open {
+.arrowOpen {
   transform: rotate(180deg);
 }
 
-.collection-content {
+.content {
   padding: 0 30px 30px;
-  animation: slideDown 0.3s ease-out;
+  animation: collectionCardSlideDown 0.3s ease-out;
 }
 
-@keyframes slideDown {
+@keyframes collectionCardSlideDown {
   from {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.collection-description {
+.description {
   color: var(--text-dark);
   margin-bottom: 30px;
   line-height: 1.7;
   font-size: 1.05rem;
 }
 
-.items-grid {
+.itemsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
 }
 
-.comic-item {
+.comicItem {
   background: var(--bg-secondary);
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
 }
 
-.comic-item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-}
-
-.comic-image-wrapper {
+.imageWrapper {
   position: relative;
   width: 100%;
   padding-top: 140%;
   overflow: hidden;
   cursor: pointer;
   background: #f0f0f0;
+
+  img {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
 }
 
-.comic-image-wrapper img {
-  transition: transform 0.3s ease;
-}
-
-.comic-image-wrapper:hover img {
-  transform: scale(1.05);
-}
-
-.image-overlay {
+.imageOverlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -148,13 +153,13 @@ html.dark .toggle-button:hover {
   color: white;
   font-weight: 600;
   z-index: 10;
+
+  .imageWrapper:hover & {
+    opacity: 1;
+  }
 }
 
-.comic-image-wrapper:hover .image-overlay {
-  opacity: 1;
-}
-
-.image-placeholder {
+.imagePlaceholder {
   position: absolute;
   top: 0;
   left: 0;
@@ -167,37 +172,37 @@ html.dark .toggle-button:hover {
   color: var(--text-light);
 }
 
-.comic-info {
+.comicInfo {
   padding: 20px;
-}
 
-.comic-info h4 {
-  font-size: 1.2rem;
-  color: var(--primary-color);
-  margin-bottom: 8px;
-  font-weight: 600;
-}
+  h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
 
-.comic-info p {
-  color: var(--text-light);
-  font-size: 0.9rem;
-  line-height: 1.5;
+  p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
 }
 
 @media (max-width: 768px) {
-  .collection-header {
+  .header {
     padding: 20px;
+
+    h3 {
+      font-size: 1.4rem;
+    }
   }
 
-  .collection-header h3 {
-    font-size: 1.4rem;
-  }
-
-  .collection-content {
+  .content {
     padding: 0 20px 20px;
   }
 
-  .items-grid {
+  .itemsGrid {
     grid-template-columns: 1fr;
     gap: 20px;
   }

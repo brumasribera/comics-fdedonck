@@ -1,0 +1,214 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  max-width: none;
+  padding: 160px 24px 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #030303;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/Figure 1A 2025/BorrowedShade_lowres.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.75) saturate(1.1);
+    transform: scale(1.02);
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(130deg, rgba(7, 7, 7, 0.92), rgba(7, 7, 7, 0.65) 45%, rgba(7, 7, 7, 0.35));
+    z-index: 0;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+
+  span {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.title {
+  font-size: clamp(3.2rem, 5vw, 5.4rem);
+  color: #ffffff;
+  line-height: 1.05;
+  font-family: 'Space Grotesk', 'PP Fragment', 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 400;
+}
+
+.description {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 560px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.primaryButton {
+  padding: 14px 36px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    background: var(--accent-color);
+    color: #111111;
+    transform: translateY(-2px);
+  }
+}
+
+.secondaryButton {
+  padding: 14px 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+
+  &:hover {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.highlights {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin-top: 10px;
+}
+
+.highlightCard {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+
+  span {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.4;
+  }
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 70px;
+  background: #ffffff;
+  animation: scrollPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0% {
+    transform: scaleY(0.6);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleY(0.6);
+    opacity: 0.4;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 140px 20px 100px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .scrollIndicator {
+    bottom: 20px;
+  }
+}
+
