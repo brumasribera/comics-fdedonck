@@ -6,9 +6,6 @@ export const size = {
   height: 630,
 };
 export const contentType = 'image/png';
-export const alt =
-  'Fien De Doncker — Comics portfolio hero artwork highlighting research-driven storytelling';
-
 export async function GET() {
   return createSharePreviewImage(size);
 }
