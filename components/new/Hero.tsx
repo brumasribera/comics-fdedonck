@@ -30,34 +30,33 @@ export default function Hero() {
   }
 
   return (
-    <header className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-neutral-950 text-white">
-      <div className="absolute inset-0 -z-20">
-        <Image
-          src={heroImage.src}
-          alt={heroImage.alt}
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover"
-        />
-      </div>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-neutral-950/90 via-neutral-950/70 to-neutral-900/40" />
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.25),_transparent_55%)] opacity-60 mix-blend-soft-light" />
+    <>
+      <header className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-neutral-950 text-white">
+        <div className="absolute inset-0 -z-20">
+          <Image
+            src={heroImage.src}
+            alt={heroImage.alt}
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-neutral-950/90 via-neutral-950/70 to-neutral-900/40" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.25),_transparent_55%)] opacity-60 mix-blend-soft-light" />
 
-      <div className="relative z-10 w-full max-w-6xl px-6 py-24 md:px-12">
-        <div className="max-w-4xl space-y-10">
+        <div className="relative z-10 w-full max-w-6xl px-6 py-24 md:px-12">
+          <div className="max-w-4xl space-y-10">
             <div>
               <p className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.4em] text-neutral-200/80">
                 Portfolio
                 <span className="h-px w-16 bg-neutral-200/60" aria-hidden />
                 Science · Art · Storytelling
               </p>
-              <h1 className="mt-6 text-4xl font-medium text-white md:text-5xl">
-                Fien De Doncker
-              </h1>
+              <h1 className="mt-6 text-4xl font-medium text-white md:text-5xl">Fien De Doncker</h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-100/85">
-                Comics that translate research, climate data, and lived experience into stories that can be felt.
-                I draw on field notes, collaborations, and activism to make the invisible visible and inspire action.
+                Comics that translate research, climate data, and lived experience into stories that can be felt. I draw on field
+                notes, collaborations, and activism to make the invisible visible and inspire action.
               </p>
             </div>
 
@@ -100,15 +99,15 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.4em] text-neutral-200/80">
-        <div className="flex flex-col items-center gap-3">
-          <ArrowDown className="h-6 w-6 animate-bounce" />
-          <span>Scroll</span>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.4em] text-neutral-200/80">
+          <div className="flex flex-col items-center gap-3">
+            <ArrowDown className="h-6 w-6 animate-bounce" />
+            <span>Scroll</span>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   )
 }
 
