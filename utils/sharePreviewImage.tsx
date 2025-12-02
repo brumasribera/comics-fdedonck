@@ -6,38 +6,7 @@ const highlights = [
   { label: 'Mediums', value: 'Comics · Research diaries · Poster narratives' },
 ];
 
-const spaceGroteskCssPromise = fetch(
-  'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap',
-).then((response) => response.text());
-
-const fontCache = new Map<number, Promise<ArrayBuffer>>();
-
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
-
-async function getSpaceGrotesk(weight: 400 | 600) {
-  if (!fontCache.has(weight)) {
-    const fontDataPromise = (async () => {
-      const css = await spaceGroteskCssPromise;
-      const fontFaceRegex = new RegExp(
-        `@font-face {[^}]*font-family: 'Space Grotesk';[^}]*font-style: normal;[^}]*font-weight: ${weight};[\\s\\S]*?src: url\\((https:[^)]*)\\) format\\('woff2'\\);`,
-        'm',
-      );
-      const fontMatch = css.match(fontFaceRegex);
-
-      if (!fontMatch) {
-        throw new Error(`Unable to load Space Grotesk weight ${weight}`);
-      }
-
-      const fontUrl = fontMatch[1];
-      const fontResponse = await fetch(fontUrl);
-      return fontResponse.arrayBuffer();
-    })();
-
-    fontCache.set(weight, fontDataPromise);
-  }
-
-  return fontCache.get(weight)!;
-}
 
 type SharePreviewSize = {
   width: number;
@@ -45,8 +14,6 @@ type SharePreviewSize = {
 };
 
 export async function createSharePreviewImage(size: SharePreviewSize) {
-  const [regularFont, semiBoldFont] = await Promise.all([getSpaceGrotesk(400), getSpaceGrotesk(600)]);
-
   const horizontalPadding = Math.max(56, Math.round(size.width * 0.08));
   const verticalPadding = Math.max(52, Math.round(size.height * 0.14));
   const eyebrowFontSize = clamp(size.width * 0.014, 14, 20);
@@ -246,10 +213,6 @@ export async function createSharePreviewImage(size: SharePreviewSize) {
     {
       width: size.width,
       height: size.height,
-      fonts: [
-        { name: 'Space Grotesk', data: regularFont, weight: 400, style: 'normal' },
-        { name: 'Space Grotesk', data: semiBoldFont, weight: 600, style: 'normal' },
-      ],
     },
   );
 }

@@ -7,7 +7,8 @@
     "local": "next dev -p 4000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:share-preview": "tsx scripts/generate-share-preview.ts"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -25,6 +26,7 @@
     "postcss": "^8.4.47",
     "sass": "^1.81.0",
     "tailwindcss": "^3.4.14",
+    "tsx": "^4.19.2",
     "typescript": "^5.3.3"
   }
 }

@@ -39,7 +39,6 @@ export default function Header() {
     x: 0,
     visible: false,
   });
-  const [isAtTop, setIsAtTop] = useState(true);
 
   const headerRef = useRef<HTMLElement | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
@@ -53,7 +52,6 @@ export default function Header() {
 
       const scrollY = window.scrollY;
       setScrolled(scrollY > 50);
-      setIsAtTop(scrollY <= 0);
       const viewportHeight = window.innerHeight;
       const headerOffset = getHeaderHeight() + SCROLL_BUFFER;
       const triggerPoint = scrollY + headerOffset;
@@ -236,7 +234,6 @@ export default function Header() {
       className={classNames(
         styles.header,
         scrolled && styles.headerScrolled,
-        !isAtTop && styles.headerHidden,
       )}
     >
       <div className={styles.container}>

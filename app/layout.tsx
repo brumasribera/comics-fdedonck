@@ -11,8 +11,8 @@ const siteMetadata = {
   imageAlt: 'Fien De Doncker — Comics portfolio share preview',
 };
 const shareImages = {
-  openGraph: `${siteMetadata.url}/opengraph-image.png`,
-  twitter: `${siteMetadata.url}/twitter-image.png`,
+  openGraph: `${siteMetadata.url}/opengraph-image`,
+  twitter: `${siteMetadata.url}/twitter-image`,
 };
 
 export const metadata: Metadata = {
