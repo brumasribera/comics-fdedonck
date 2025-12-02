@@ -3,9 +3,15 @@ import path from 'node:path';
 
 import { createSharePreviewImage } from '../utils/sharePreviewImage';
 
-const targets = [
+type TargetSpec = {
+  size: { width: number; height: number };
+  filename: string;
+};
+
+const targets: TargetSpec[] = [
   { size: { width: 1200, height: 630 }, filename: 'opengraph-image.png' },
   { size: { width: 1200, height: 600 }, filename: 'twitter-image.png' },
+  { size: { width: 1200, height: 630 }, filename: 'og-image.jpg' },
 ];
 
 async function generate() {
@@ -16,7 +22,7 @@ async function generate() {
     const outputPath = path.resolve(process.cwd(), 'public', target.filename);
 
     await writeFile(outputPath, buffer);
-    console.log(`✅ Saved ${target.filename}`);
+    console.log(`[share-preview] Saved ${target.filename}`);
   }
 }
 

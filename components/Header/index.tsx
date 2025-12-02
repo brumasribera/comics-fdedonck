@@ -12,12 +12,13 @@ const NAV_SECTIONS = [
   { id: 'noplane', label: 'No Plane Adventures' },
   { id: 'other', label: 'Other Comics' },
   { id: 'posters', label: 'Posters' },
+  { id: 'about', label: 'About' },
+  { id: 'contact', label: 'Contact' },
 ] as const;
 
-type NavSectionId = (typeof NAV_SECTIONS)[number]['id'];
-type SectionId = NavSectionId | 'about';
+type SectionId = (typeof NAV_SECTIONS)[number]['id'];
 
-const TRACKED_SECTION_IDS: SectionId[] = [...NAV_SECTIONS.map((section) => section.id), 'about'];
+const TRACKED_SECTION_IDS: SectionId[] = NAV_SECTIONS.map((section) => section.id);
 
 const isSectionId = (value: string): value is SectionId =>
   TRACKED_SECTION_IDS.some((sectionId) => sectionId === value);
@@ -225,9 +226,6 @@ export default function Header() {
 
   };
 
-  const aboutIsActive = activeSection === 'about';
-  const aboutIsVisible = visibleSections.has('about');
-
   return (
     <header
       ref={headerRef}
@@ -295,29 +293,6 @@ export default function Header() {
               </button>
             );
           })}
-          <button
-            type="button"
-            className={classNames(
-              styles.navButton,
-              aboutIsActive && styles.navButtonActive,
-              aboutIsVisible && styles.navButtonVisible,
-            )}
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              scrollToSection('about');
-            }}
-            aria-current={aboutIsActive ? 'page' : undefined}
-            ref={(element) => {
-              if (element) {
-                buttonRefs.current.about = element;
-              } else {
-                delete buttonRefs.current.about;
-              }
-            }}
-          >
-            About
-          </button>
         </nav>
       </div>
     </header>

@@ -147,9 +147,13 @@ export default function Collections({ openLightbox }: CollectionsProps) {
       src: item.fullImage,
       title: item.title,
     }));
+    const collectionWrapperClassName = classNames(
+      styles.collectionWrapper,
+      collection.id === 'posters' && styles.posterCollection,
+    );
 
     return (
-      <div key={collection.id} id={collection.id} className={styles.collectionWrapper}>
+      <div key={collection.id} id={collection.id} className={collectionWrapperClassName}>
         <div className={classNames(styles.panel, isCompact && styles.panelCompact)}>
           <div className={styles.panelHeader}>
             <div className={styles.titleSection}>

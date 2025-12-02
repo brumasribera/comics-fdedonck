@@ -24,30 +24,6 @@ export default function About() {
             </p>
           </div>
 
-          <div className={styles.contactSection}>
-          <div className={styles.contactBadge}>Available for collaborations</div>
-            <h3>Contact</h3>
-          <p className={styles.contactSubtitle}>
-            Let’s craft science-driven stories, editorial illustrations, or workshops together.
-          </p>
-          <ul className={styles.contactHighlights}>
-            <li>Science storytelling & research translation</li>
-            <li>Editorial & educational illustration</li>
-            <li>Talks, workshops, and residencies</li>
-          </ul>
-            <div className={styles.contactActions}>
-              <a
-                href="mailto:fien.a.c.de.doncker@gmail.com"
-                className={styles.emailButton}
-                aria-label="Email Fien De Doncker"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Send me an email
-              </a>
-            </div>
-            <p className={styles.note}>Please ask before sharing these comics elsewhere.</p>
-          </div>
         </div>
       </div>
     </section>

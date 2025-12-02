@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import About from '@/components/About';
 import Collections from '@/components/Collections';
+import Contact from '@/components/Contact';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Lightbox, { type LightboxImage } from '@/components/Lightbox';
@@ -30,6 +31,7 @@ export default function Home() {
       <Hero />
       <Collections openLightbox={openLightbox} />
       <About />
+      <Contact />
       {lightboxState && (
         <Lightbox items={lightboxState.items} initialIndex={lightboxState.index} onClose={closeLightbox} />
       )}
