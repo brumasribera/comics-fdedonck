@@ -197,7 +197,8 @@ export default function Collections({ openLightbox }: CollectionsProps) {
                         fill
                         style={{ objectFit: 'cover', pointerEvents: 'none' }}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        unoptimized
+                        quality={55}
+                        loading="lazy"
                       />
                       <div
                         className={classNames(styles.overlay, hasDownloads && styles.overlayDownloads)}

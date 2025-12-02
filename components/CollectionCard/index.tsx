@@ -55,7 +55,7 @@ export default function CollectionCard({ collection, isActive, onToggle, openLig
                       onError={() => handleImageError(item.title)}
                       loading="lazy"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      unoptimized
+                      quality={55}
                     />
                   ) : (
                     <div className={styles.imagePlaceholder}>
