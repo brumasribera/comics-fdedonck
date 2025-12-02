@@ -10,6 +10,10 @@ const siteMetadata = {
   url: 'https://comics-fdedonck.vercel.app',
   imageAlt: 'Fien De Doncker — Comics portfolio share preview',
 };
+const shareImages = {
+  openGraph: `${siteMetadata.url}/opengraph-image.png`,
+  twitter: `${siteMetadata.url}/twitter-image.png`,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.url),
@@ -27,10 +31,12 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/opengraph-image',
+        url: shareImages.openGraph,
+        secureUrl: shareImages.openGraph,
         width: 1200,
         height: 630,
         alt: siteMetadata.imageAlt,
+        type: 'image/png',
       },
     ],
   },
@@ -38,7 +44,12 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteMetadata.title,
     description: siteMetadata.description,
-    images: ['/twitter-image'],
+    images: [
+      {
+        url: shareImages.twitter,
+        alt: siteMetadata.imageAlt,
+      },
+    ],
   },
 };
 
