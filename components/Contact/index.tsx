@@ -90,7 +90,7 @@ export default function Contact() {
       animationTimeout = window.setTimeout(animate, nextDuration);
     };
 
-    let animationTimeout: ReturnType<typeof setTimeout> | null = null;
+    let animationTimeout: number | null = null;
 
     initializePosition();
     animationTimeout = window.setTimeout(animate, 400);
@@ -110,8 +110,8 @@ export default function Contact() {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      if (animationTimeout) {
-        clearTimeout(animationTimeout);
+      if (animationTimeout !== null) {
+        window.clearTimeout(animationTimeout);
       }
       window.removeEventListener('resize', handleResize);
     };
