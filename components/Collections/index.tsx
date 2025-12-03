@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useRef } from 'react';
 
 import type { LightboxImage } from '@/components/Lightbox';
 import type { Collection } from '@/types/collections';
@@ -171,10 +170,6 @@ export default function Collections({ openLightbox }: CollectionsProps) {
                 const hasDownloads = Boolean(item.downloads?.length);
                 const cardClassName = classNames(styles.card, hasDownloads && styles.cardWithDownloads);
                 const openImage = () => openLightbox(lightboxItems, index);
-                const [showDownloads, setShowDownloads] = useState(false);
-                const touchStartTimeRef = useRef<number | null>(null);
-                const isLinkTouchRef = useRef<boolean>(false);
-
                 const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
                   if (hasDownloads) {
                     return;
@@ -186,46 +181,8 @@ export default function Collections({ openLightbox }: CollectionsProps) {
                   }
                 };
 
-                const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
-                  console.log('[DEBUG] Card onClick fired:', {
-                    hasDownloads,
-                    target: event.target,
-                    currentTarget: event.currentTarget,
-                    isLinkTouch: isLinkTouchRef.current,
-                    timeSinceTouch: touchStartTimeRef.current ? Date.now() - touchStartTimeRef.current : null,
-                  });
-                  
-                  // If this click was preceded by a touch on a link, ignore it
-                  if (isLinkTouchRef.current) {
-                    console.log('[DEBUG] Ignoring card click - was a link touch');
-                    isLinkTouchRef.current = false;
-                    touchStartTimeRef.current = null;
-                    return;
-                  }
-                  
-                  // On small screens with downloads, toggle visibility
-                  if (hasDownloads) {
-                    // Check if click was on the download buttons area or any link - if so, don't toggle
-                    const target = event.target as HTMLElement;
-                    const isClickOnDownloads = target.closest(`.${styles.downloads}`) !== null;
-                    const isClickOnLink = target.closest('a') !== null;
-                    
-                    console.log('[DEBUG] Card click check:', {
-                      isClickOnDownloads,
-                      isClickOnLink,
-                      showDownloads,
-                    });
-                    
-                    // If click is on download buttons or links, let them handle it (don't toggle)
-                    if (isClickOnDownloads || isClickOnLink) {
-                      console.log('[DEBUG] Click on downloads/link, returning early');
-                      return;
-                    }
-                    
-                    // Otherwise toggle visibility (show on first click, hide on second if clicking outside)
-                    console.log('[DEBUG] Toggling showDownloads from', showDownloads, 'to', !showDownloads);
-                    setShowDownloads(!showDownloads);
-                  } else {
+                const handleCardClick = () => {
+                  if (!hasDownloads) {
                     openImage();
                   }
                 };
@@ -235,22 +192,6 @@ export default function Collections({ openLightbox }: CollectionsProps) {
                     key={item.title}
                     className={cardClassName}
                     onClick={handleCardClick}
-                    onTouchStart={(e) => {
-                      console.log('[DEBUG] Card onTouchStart:', {
-                        hasDownloads,
-                        target: e.target,
-                        closestA: (e.target as HTMLElement).closest('a'),
-                        closestDownloads: (e.target as HTMLElement).closest(`.${styles.downloads}`),
-                      });
-                      // On mobile, if touching a link, don't let card handler interfere
-                      if (hasDownloads) {
-                        const target = e.target as HTMLElement;
-                        if (target.closest('a') || target.closest(`.${styles.downloads}`)) {
-                          console.log('[DEBUG] Stopping propagation on card touch');
-                          e.stopPropagation();
-                        }
-                      }
-                    }}
                     role={!hasDownloads ? 'button' : undefined}
                     tabIndex={!hasDownloads ? 0 : undefined}
                     onKeyDown={handleKeyDown}
@@ -269,70 +210,21 @@ export default function Collections({ openLightbox }: CollectionsProps) {
                         loading="lazy"
                       />
                       <div
-                        className={classNames(
-                          styles.overlay,
-                          hasDownloads && styles.overlayDownloads,
-                          // Only apply visible class on mobile when showDownloads is true
-                          showDownloads && styles.overlayDownloadsVisible,
-                        )}
+                        className={classNames(styles.overlay, hasDownloads && styles.overlayDownloads)}
                         onClick={(event) => {
-                          // Only handle clicks if not clicking on download links
-                          const target = event.target as HTMLElement;
-                          if (target.closest('a')) {
-                            // Let the link handle the click
+                          if (hasDownloads) {
                             return;
                           }
+
                           event.stopPropagation();
-                          if (!hasDownloads) {
-                            openImage();
-                          }
-                        }}
-                        onTouchStart={(event) => {
-                          console.log('[DEBUG] Overlay onTouchStart:', {
-                            target: event.target,
-                            closestA: (event.target as HTMLElement).closest('a'),
-                            closestDownloads: (event.target as HTMLElement).closest(`.${styles.downloads}`),
-                          });
-                          // If touching downloads area, let it pass through
-                          const target = event.target as HTMLElement;
-                          if (target.closest('a') || target.closest(`.${styles.downloads}`)) {
-                            console.log('[DEBUG] Stopping propagation on overlay touch - link/downloads');
-                            event.stopPropagation();
-                            // Don't prevent default - let the link handle it
-                            return;
-                          }
+                          openImage();
                         }}
                       >
                         {hasDownloads ? (
-                          <div 
-                            className={classNames(
-                              styles.downloads,
-                              // Only hide on mobile when showDownloads is false
-                              !showDownloads && styles.downloadsHidden
-                            )} 
-                            onClick={(e) => {
-                              // Only stop propagation if clicking on the container itself, not links
-                              const target = e.target as HTMLElement;
-                              if (!target.closest('a')) {
-                                e.stopPropagation();
-                              }
-                            }}
-                            onTouchStart={(e) => {
-                              console.log('[DEBUG] Downloads container onTouchStart:', {
-                                target: e.target,
-                                closestA: (e.target as HTMLElement).closest('a'),
-                                isLink: (e.target as HTMLElement).tagName === 'A',
-                              });
-                              // Always stop propagation from downloads container to prevent card handler
-                              e.stopPropagation();
-                              
-                              // If touching a link directly, mark it
-                              const target = e.target as HTMLElement;
-                              if (target.tagName === 'A' || target.closest('a')) {
-                                console.log('[DEBUG] Direct link touch detected');
-                                isLinkTouchRef.current = true;
-                                touchStartTimeRef.current = Date.now();
-                              }
+                          <div
+                            className={styles.downloads}
+                            onClick={(event) => {
+                              event.stopPropagation();
                             }}
                           >
                             <span className={styles.downloadLabel}>View PDF</span>
@@ -344,64 +236,8 @@ export default function Collections({ openLightbox }: CollectionsProps) {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className={styles.downloadLink}
-                                  onClick={(e) => {
-                                    console.log('[DEBUG] Link onClick fired:', {
-                                      href: download.href,
-                                      target: e.target,
-                                      currentTarget: e.currentTarget,
-                                      defaultPrevented: e.defaultPrevented,
-                                      isTrusted: e.isTrusted,
-                                    });
-                                    
-                                    // Stop all propagation to prevent card handler
-                                    e.stopPropagation();
-                                    e.nativeEvent.stopImmediatePropagation();
-                                    
-                                    // On mobile, if default was prevented, manually navigate
-                                    if (e.defaultPrevented) {
-                                      console.log('[DEBUG] Default was prevented, manually navigating to:', download.href);
-                                      window.open(download.href, '_blank', 'noopener,noreferrer');
-                                    } else {
-                                      console.log('[DEBUG] Default navigation should work, href:', download.href);
-                                    }
-                                  }}
-                                  onTouchStart={(e) => {
-                                    console.log('[DEBUG] Link onTouchStart fired:', {
-                                      href: download.href,
-                                      target: e.target,
-                                      tagName: (e.target as HTMLElement).tagName,
-                                    });
-                                    // Mark that we're touching a link
-                                    isLinkTouchRef.current = true;
-                                    touchStartTimeRef.current = Date.now();
-                                    // Prevent parent handlers from interfering on touch devices
-                                    e.stopPropagation();
-                                    e.nativeEvent.stopImmediatePropagation();
-                                  }}
-                                  onTouchEnd={(e) => {
-                                    console.log('[DEBUG] Link onTouchEnd fired:', {
-                                      href: download.href,
-                                      target: e.target,
-                                    });
-                                    // Prevent card click from firing
-                                    e.stopPropagation();
-                                    e.nativeEvent.stopImmediatePropagation();
-                                    
-                                    // Small delay to ensure click event can fire
-                                    setTimeout(() => {
-                                      isLinkTouchRef.current = false;
-                                      touchStartTimeRef.current = null;
-                                    }, 300);
-                                  }}
-                                  onMouseDown={(e) => {
-                                    // Also prevent mousedown from triggering card click
-                                    e.stopPropagation();
-                                  }}
-                                  onTouchEnd={(e) => {
-                                    console.log('[DEBUG] Link onTouchEnd fired:', {
-                                      href: download.href,
-                                      target: e.target,
-                                    });
+                                  onClick={(event) => {
+                                    event.stopPropagation();
                                   }}
                                 >
                                   {download.label}
@@ -414,6 +250,27 @@ export default function Collections({ openLightbox }: CollectionsProps) {
                         )}
                       </div>
                     </div>
+                    {hasDownloads && (
+                      <div className={styles.downloadsMobile}>
+                        <span className={styles.downloadLabel}>View PDF</span>
+                        <div className={styles.downloadLinks}>
+                          {item.downloads?.map((download) => (
+                            <a
+                              key={`mobile-${item.title}-${download.label}`}
+                              href={download.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.downloadLink}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                              }}
+                            >
+                              {download.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     <div className={styles.cardInfo}>
                       <h4>{item.title}</h4>
                       <p>{item.description}</p>

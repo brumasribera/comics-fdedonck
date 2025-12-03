@@ -241,20 +241,6 @@
     opacity: 1;
   }
 
-  @media (max-width: 768px) {
-    // On small screens, overlay should be clickable even when hidden (for downloads)
-    pointer-events: auto;
-    
-    // When downloads are visible, don't block touches to links
-    &.overlayDownloadsVisible {
-      pointer-events: none;
-      
-      // But allow clicks on the overlay itself (not links)
-      .downloads {
-        pointer-events: auto;
-      }
-    }
-  }
 }
 
 .overlayDownloads {
@@ -264,23 +250,9 @@
   padding: 20px;
   // On desktop, show on hover (handled by .card:hover .overlay)
   // On mobile, visibility controlled by overlayDownloadsVisible class
-}
 
-.overlayDownloadsVisible {
   @media (max-width: 768px) {
-    opacity: 1 !important;
-    // When downloads are visible, don't block touches to links
-    pointer-events: none !important;
-    
-    // But allow the downloads container itself to receive events
-    .downloads {
-      pointer-events: auto !important;
-    }
-  }
-  
-  // On desktop, ensure it still works with hover
-  @media (min-width: 769px) {
-    // Don't override hover behavior on desktop
+    display: none;
   }
 }
 
@@ -307,34 +279,6 @@
     
     &:hover {
       transform: translateY(-1px);
-    }
-  }
-}
-
-// On small screens, disable links when hidden
-.downloadsHidden {
-  @media (max-width: 768px) {
-    pointer-events: none;
-    
-    .downloadLink {
-      pointer-events: none !important;
-      cursor: default;
-    }
-  }
-}
-
-// Ensure links are always clickable when not hidden (especially on mobile)
-@media (max-width: 768px) {
-  .downloads:not(.downloadsHidden) {
-    pointer-events: auto !important;
-    
-    .downloadLink {
-      pointer-events: auto !important;
-      cursor: pointer !important;
-      position: relative;
-      z-index: 1000;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-      touch-action: manipulation;
     }
   }
 }
@@ -392,6 +336,37 @@
   border-radius: 999px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
   color: #111;
+}
+
+.downloadsMobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .downloadsMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .downloadsMobile .downloadLabel {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  .downloadsMobile .downloadLinks {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .downloadsMobile .downloadLink {
+    font-size: 0.75rem;
+    padding: 6px 14px;
+    box-shadow: none;
+  }
 }
 
 .downloadLabel {
