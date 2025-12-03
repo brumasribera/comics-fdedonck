@@ -11,7 +11,6 @@ type TargetSpec = {
 const targets: TargetSpec[] = [
   { size: { width: 1200, height: 630 }, filename: 'opengraph-image.png' },
   { size: { width: 1200, height: 600 }, filename: 'twitter-image.png' },
-  { size: { width: 1200, height: 630 }, filename: 'og-image.jpg' },
 ];
 
 async function generate() {

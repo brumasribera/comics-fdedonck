@@ -37,35 +37,32 @@
 }
 
 .navButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  position: relative;
+  background: transparent;
   border: none;
   color: white;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   cursor: pointer;
-  z-index: 2002;
   transition: background 0.2s ease, color 0.2s ease;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.75);
-    color: #111;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
   }
 }
 
 .navButtonLeft {
-  left: -80px;
+  left: auto;
 }
 
 .navButtonRight {
-  right: -80px;
+  right: auto;
 }
 
 .counter {
@@ -153,7 +150,7 @@
 .imageContainer {
   width: 100%;
   max-width: 100%;
-  max-height: 80vh;
+  max-height: calc(100vh - 180px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,19 +168,26 @@
   cursor: grab;
   overflow: auto;
   max-width: 100vw;
-  max-height: calc(100vh - 120px);
-  height: 100%;
+  max-height: 100vh;
+  width: 100%;
+  height: 100vh;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
   touch-action: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 }
 
 .image {
   max-width: 100%;
-  max-height: 85vh;
+  max-height: calc(100vh - 180px);
   object-fit: contain;
   border-radius: 0;
   box-shadow: none;
@@ -220,31 +224,40 @@
   background: rgba(0, 0, 0, 0.55);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(12px);
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2001;
+  pointer-events: auto;
 }
 
 .zoomButton {
   position: relative;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border: none;
   color: white;
-  font-size: 1.1rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.8rem;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
+  pointer-events: auto;
+  z-index: 1;
 
   &:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
   }
 
   &:disabled {
     opacity: 0.35;
     cursor: not-allowed;
+    pointer-events: none;
   }
 }
 
@@ -252,9 +265,16 @@
   display: none;
 }
 
+.zoomDivider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 2px;
+}
+
 .zoomIcon {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   display: inline-block;
   position: relative;
 
@@ -270,13 +290,13 @@
   }
 
   &::before {
-    width: 12px;
+    width: 16px;
     height: 2px;
   }
 
   &::after {
     width: 2px;
-    height: 12px;
+    height: 16px;
   }
 }
 
@@ -343,18 +363,18 @@
   }
 
   .navButton {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     font-size: 1.6rem;
-    background: rgba(0, 0, 0, 0.65);
+    background: transparent;
   }
 
   .navButtonLeft {
-    left: 10px;
+    left: auto;
   }
 
   .navButtonRight {
-    right: 10px;
+    right: auto;
   }
 
   .counter {
@@ -373,7 +393,7 @@
   .imageContainer {
     padding: 12px;
     border-radius: 16px;
-    max-height: 70vh;
+    max-height: calc(100vh - 140px);
   }
 
   .imageContainerZoomed {
@@ -383,6 +403,7 @@
   .controls {
     padding: 8px 12px;
     gap: 8px;
+    bottom: 12px;
   }
 
   .zoomSlider {

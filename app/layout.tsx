@@ -4,14 +4,14 @@ import type { ReactNode } from 'react';
 import './globals.css';
 
 const siteMetadata = {
-  title: 'Fien De Doncker - Comics Portfolio',
+  title: 'Fien De Doncker — Comics Portfolio | Science & Social Justice',
   description:
-    'Science, art, and storytelling comics at the intersection of research, art, and social justice.',
+    'Science, art, and storytelling comics at the intersection of research, art, and social justice. Visual narratives translating data and lived realities into bold stories for climate action.',
   url: 'https://comics-fdedonck.vercel.app',
   imageAlt: 'Fien De Doncker — Comics portfolio share preview',
 };
 const shareImages = {
-  openGraph: `${siteMetadata.url}/og-image.jpg`,
+  openGraph: `${siteMetadata.url}/opengraph-image`,
   twitter: `${siteMetadata.url}/twitter-image`,
 };
 
@@ -54,8 +54,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  // Some browser extensions inject attributes (e.g. data-demoway-document-id) on <html>/<body>
+  // before hydration. Suppress hydration warnings so the dev overlay stays quiet.
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -64,7 +66,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

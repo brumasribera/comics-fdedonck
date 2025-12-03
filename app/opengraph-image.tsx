@@ -1,4 +1,4 @@
-import { createSharePreviewImage } from '@/utils/sharePreviewImage';
+import { createSharePreviewImage } from '../utils/sharePreviewImage';
 
 export const runtime = 'edge';
 export const size = {

@@ -240,6 +240,21 @@
   .card:hover & {
     opacity: 1;
   }
+
+  @media (max-width: 768px) {
+    // On small screens, overlay should be clickable even when hidden (for downloads)
+    pointer-events: auto;
+    
+    // When downloads are visible, don't block touches to links
+    &.overlayDownloadsVisible {
+      pointer-events: none;
+      
+      // But allow clicks on the overlay itself (not links)
+      .downloads {
+        pointer-events: auto;
+      }
+    }
+  }
 }
 
 .overlayDownloads {
@@ -247,6 +262,81 @@
   backdrop-filter: blur(8px);
   cursor: default;
   padding: 20px;
+  // On desktop, show on hover (handled by .card:hover .overlay)
+  // On mobile, visibility controlled by overlayDownloadsVisible class
+}
+
+.overlayDownloadsVisible {
+  @media (max-width: 768px) {
+    opacity: 1 !important;
+    // When downloads are visible, don't block touches to links
+    pointer-events: none !important;
+    
+    // But allow the downloads container itself to receive events
+    .downloads {
+      pointer-events: auto !important;
+    }
+  }
+  
+  // On desktop, ensure it still works with hover
+  @media (min-width: 769px) {
+    // Don't override hover behavior on desktop
+  }
+}
+
+// On desktop, links always work (hover shows overlay)
+.downloads {
+  pointer-events: auto;
+  position: relative;
+  z-index: 1000;
+  
+  .downloadLink {
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+    transition: all 0.2s ease;
+  }
+}
+
+// On desktop, ensure hover effects work
+@media (min-width: 769px) {
+  .downloads .downloadLink {
+    pointer-events: auto;
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// On small screens, disable links when hidden
+.downloadsHidden {
+  @media (max-width: 768px) {
+    pointer-events: none;
+    
+    .downloadLink {
+      pointer-events: none !important;
+      cursor: default;
+    }
+  }
+}
+
+// Ensure links are always clickable when not hidden (especially on mobile)
+@media (max-width: 768px) {
+  .downloads:not(.downloadsHidden) {
+    pointer-events: auto !important;
+    
+    .downloadLink {
+      pointer-events: auto !important;
+      cursor: pointer !important;
+      position: relative;
+      z-index: 1000;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+      touch-action: manipulation;
+    }
+  }
 }
 
 .viewText {
@@ -329,12 +419,22 @@
   text-decoration: none;
   box-shadow: 0 8px 18px rgba(17, 17, 17, 0.15);
   transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  display: inline-block;
+  position: relative;
+  z-index: 1000;
 
   &:hover,
   &:focus-visible {
     background: var(--primary-color);
     color: #fff;
     transform: translateY(-1px);
+  }
+
+  // Ensure links work on mobile
+  @media (max-width: 768px) {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    touch-action: manipulation;
+    user-select: none;
   }
 }
 

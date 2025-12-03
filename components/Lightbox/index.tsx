@@ -76,18 +76,44 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
       return;
     }
 
-    const scrollLeft = Math.max(0, (container.scrollWidth - container.clientWidth) / 2);
-    const scrollTop = Math.max(0, (container.scrollHeight - container.clientHeight) / 2);
+    // Wait for the DOM to update with new dimensions, then center
+    // Use multiple delays to ensure image has fully resized
+    const attemptCenter = (attempts = 0) => {
+      if (attempts > 5) return; // Max 5 attempts
+      
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const scrollWidth = container.scrollWidth;
+          const scrollHeight = container.scrollHeight;
+          const clientWidth = container.clientWidth;
+          const clientHeight = container.clientHeight;
 
-    container.scrollTo({
-      left: scrollLeft,
-      top: scrollTop,
-    });
+          // Check if dimensions are valid and there's scrollable content
+          if (scrollWidth > 0 && scrollHeight > 0 && (scrollWidth > clientWidth || scrollHeight > clientHeight)) {
+            // Calculate center position to center the image in the viewport
+            const scrollLeft = scrollWidth > clientWidth
+              ? Math.max(0, (scrollWidth - clientWidth) / 2)
+              : 0;
+            const scrollTop = scrollHeight > clientHeight
+              ? Math.max(0, (scrollHeight - clientHeight) / 2)
+              : 0;
+
+            // Set scroll position directly (instant)
+            container.scrollLeft = scrollLeft;
+            container.scrollTop = scrollTop;
+          } else if (attempts < 5) {
+            // If dimensions aren't ready yet, try again
+            attemptCenter(attempts + 1);
+          }
+        }, 100 + (attempts * 50));
+      });
+    };
+
+    attemptCenter();
   }, []);
 
   const resetZoomLevel = useCallback(() => {
     setZoomLevel(MIN_ZOOM);
-    setShowPanHint(false);
     imageContainerRef.current?.scrollTo({ left: 0, top: 0 });
   }, []);
 
@@ -170,7 +196,8 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
     }
 
     const horizontalPadding = isMobileViewport ? 24 : 80;
-    const verticalPadding = isMobileViewport ? 120 : 160;
+    // Account for close button at top (~68px) and fixed controls at bottom (~80px)
+    const verticalPadding = isMobileViewport ? 140 : 180;
     const availableWidth = Math.max(240, viewportSize.width - horizontalPadding);
     const availableHeight = Math.max(240, viewportSize.height - verticalPadding);
     const widthFromHeight = (naturalSize.width / naturalSize.height) * availableHeight;
@@ -218,15 +245,20 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
   const handleZoomInput = useCallback(
     (value: number) => {
       const nextZoom = clampZoom(value);
+      const wasZoomed = zoomLevel > MIN_ZOOM + 0.01;
       setZoomLevel(nextZoom);
-      if (nextZoom > MIN_ZOOM) {
-        setShowPanHint(true);
-      } else {
-        setShowPanHint(false);
+      
+      if (nextZoom === MIN_ZOOM) {
         imageContainerRef.current?.scrollTo({ left: 0, top: 0 });
+      } else if (nextZoom > MIN_ZOOM + 0.01) {
+        // Center the image when zooming in or changing zoom level
+        // Use a longer delay to ensure the image has resized
+        setTimeout(() => {
+          centerImage();
+        }, 100);
       }
     },
-    [clampZoom],
+    [clampZoom, centerImage, zoomLevel],
   );
 
 
@@ -413,42 +445,30 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
       event.stopPropagation();
 
       if (!isZoomed) {
-        handleZoomInput(fullWidthZoomTarget);
+        // Zoom in when clicking the image
+        if (fullWidthZoomTarget > MIN_ZOOM) {
+          handleZoomInput(fullWidthZoomTarget);
+        } else {
+          // If fullWidthZoomTarget is not available, zoom by step
+          const delta = ZOOM_STEP;
+          handleZoomInput(Number((zoomLevel + delta).toFixed(2)));
+        }
         return;
       }
 
-      const container = imageContainerRef.current;
-      if (!container) {
-        return;
-      }
-
-      const rect = container.getBoundingClientRect();
-      const scrollableX = container.scrollWidth - container.clientWidth;
-      const scrollableY = container.scrollHeight - container.clientHeight;
-
-      if (scrollableX <= 0 && scrollableY <= 0) {
-        return;
-      }
-
-      const relativeX = (event.clientX - rect.left) / rect.width;
-      const relativeY = (event.clientY - rect.top) / rect.height;
-
-      container.scrollTo({
-        left: scrollableX * relativeX,
-        top: scrollableY * relativeY,
-        behavior: 'smooth',
-      });
-
-      setShowPanHint(false);
+      // If already zoomed, center the image
+      centerImage();
     },
-    [fullWidthZoomTarget, handleZoomInput, isZoomed],
+    [fullWidthZoomTarget, handleZoomInput, isZoomed, centerImage, zoomLevel],
   );
 
   useEffect(() => {
-    if (previousZoomLevelRef.current <= MIN_ZOOM && zoomLevel > MIN_ZOOM) {
-      requestAnimationFrame(() => {
+    // Center image when transitioning from unzoomed to zoomed
+    if (previousZoomLevelRef.current <= MIN_ZOOM + 0.01 && zoomLevel > MIN_ZOOM + 0.01) {
+      // Use a longer delay to ensure DOM has updated with new dimensions, especially for portrait images
+      setTimeout(() => {
         centerImage();
-      });
+      }, 150);
     }
 
     previousZoomLevelRef.current = zoomLevel;
@@ -471,36 +491,6 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
         >
           ×
         </button>
-
-        {hasMultiple && (
-          <>
-            <button
-              className={classNames(styles.navButton, styles.navButtonLeft)}
-              onClick={(event) => {
-                event.stopPropagation();
-                goToPrevious();
-              }}
-              type="button"
-              aria-label="View previous image"
-            >
-              ‹
-            </button>
-            <button
-              className={classNames(styles.navButton, styles.navButtonRight)}
-              onClick={(event) => {
-                event.stopPropagation();
-                goToNext();
-              }}
-              type="button"
-              aria-label="View next image"
-            >
-              ›
-            </button>
-            <div className={styles.counter}>
-              {currentIndex + 1} / {items.length}
-            </div>
-          </>
-        )}
 
         <div
           ref={imageContainerRef}
@@ -527,7 +517,7 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
               width: imageWidth,
               height: 'auto',
               maxWidth: isZoomed ? imageWidth : '100%',
-              maxHeight: isZoomed ? 'none' : '85vh',
+              maxHeight: isZoomed ? 'none' : 'calc(100vh - 180px)',
               objectFit: 'contain',
             }}
             unoptimized
@@ -538,52 +528,59 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
         </div>
 
         <div className={styles.controls} onClick={(event) => event.stopPropagation()}>
+          {hasMultiple && (
+            <button
+              className={classNames(styles.navButton, styles.navButtonLeft)}
+              onClick={(event) => {
+                event.stopPropagation();
+                goToPrevious();
+              }}
+              type="button"
+              aria-label="View previous image"
+            >
+              ‹
+            </button>
+          )}
           <button
             type="button"
             className={classNames(styles.zoomButton, styles.zoomButtonMinus)}
-            onClick={() => handleZoomStep('out')}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleZoomStep('out');
+            }}
             disabled={!zoomControlsEnabled || zoomLevel <= MIN_ZOOM}
             aria-label="Zoom out"
           >
             <span aria-hidden="true" className={styles.zoomIcon} />
           </button>
-          <input
-            type="range"
-            min={MIN_ZOOM}
-            max={zoomControlsEnabled ? maxZoom : MIN_ZOOM}
-            step={0.05}
-            value={zoomLevel}
-            onChange={(event) => handleZoomInput(parseFloat(event.target.value))}
-            className={styles.zoomSlider}
-            aria-label="Zoom level"
-            disabled={!zoomControlsEnabled}
-          />
+          <div className={styles.zoomDivider} />
           <button
             type="button"
             className={classNames(styles.zoomButton, styles.zoomButtonPlus)}
-            onClick={() => handleZoomStep('in')}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleZoomStep('in');
+            }}
             disabled={!zoomControlsEnabled || zoomLevel >= maxZoom}
             aria-label="Zoom in"
           >
             <span aria-hidden="true" className={styles.zoomIcon} />
           </button>
-          <button
-            type="button"
-            className={classNames(styles.zoomButton, styles.resetButton)}
-            onClick={handleResetZoom}
-            disabled={zoomLevel === MIN_ZOOM}
-            aria-label="Reset zoom"
-          >
-            Fit
-          </button>
-          <span className={styles.zoomValue}>{zoomPercentage}%</span>
+          {hasMultiple && (
+            <button
+              className={classNames(styles.navButton, styles.navButtonRight)}
+              onClick={(event) => {
+                event.stopPropagation();
+                goToNext();
+              }}
+              type="button"
+              aria-label="View next image"
+            >
+              ›
+            </button>
+          )}
         </div>
 
-        {showPanHint && (
-          <p className={styles.panHint} onClick={(event) => event.stopPropagation()}>
-            Tap the zoomed image to pan across different areas.
-          </p>
-        )}
       </div>
     </div>
   );

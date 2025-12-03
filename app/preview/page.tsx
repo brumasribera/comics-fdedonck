@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 
-const baseUrl = 'https://comics-fdedonck.vercel.app';
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://comics-fdedonck.vercel.app');
 const routePath = '/preview';
 const canonicalUrl = `${baseUrl}${routePath}`;
-const previewImage = `${baseUrl}/whatsapp-preview.png`;
+const previewImagePath = '/opengraph-image';
+const previewImage = `${baseUrl}${previewImagePath}`;
 const previewTitle = 'Fien De Doncker • Research Comics for Curious Minds';
 const previewDescription =
   'Dive into comics that translate complex research into bold, accessible stories about cities, mobility, and climate justice.';
@@ -43,7 +46,7 @@ export default function PreviewPage() {
       <p className="text-lg leading-relaxed text-neutral-700">{previewDescription}</p>
       <figure className="overflow-hidden rounded-3xl border border-neutral-200 shadow-xl">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/whatsapp-preview.png" alt="Preview of the comics portfolio share card" className="w-full" />
+        <img src={previewImagePath} alt="Preview of the comics portfolio share card" className="w-full" />
         <figcaption className="bg-neutral-50 px-4 py-3 text-sm text-neutral-600">
           This is the exact artwork WhatsApp and other Open Graph scrapers will pull.
         </figcaption>

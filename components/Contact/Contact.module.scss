@@ -18,6 +18,9 @@
   color: #f7f7f7;
   font-family: 'Space Grotesk', 'Inter', sans-serif;
   overflow: hidden;
+  --spotlight-x: 20px;
+  --spotlight-y: 20px;
+  --spotlight-duration: 6500ms;
 }
 
 .container::before {
@@ -25,10 +28,14 @@
   position: absolute;
   width: 220px;
   height: 220px;
-  inset: 10px auto auto 10px;
+  top: 0;
+  left: 0;
   background: radial-gradient(circle, rgba(212, 175, 55, 0.35), transparent 65%);
   filter: blur(6px);
   pointer-events: none;
+  transform: translate3d(var(--spotlight-x), var(--spotlight-y), 0);
+  transition: transform var(--spotlight-duration) ease-in-out;
+  will-change: transform;
 }
 
 .badge {
