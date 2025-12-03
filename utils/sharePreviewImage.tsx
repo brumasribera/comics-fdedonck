@@ -43,6 +43,8 @@ export async function createSharePreviewImage(size: SharePreviewSize) {
         <img
           src={imageUrl}
           alt=""
+          width={size.width}
+          height={size.height}
           style={{
             position: 'absolute',
             top: 0,
