@@ -6,6 +6,10 @@ type SharePreviewSize = {
   height: number
 }
 
+type SharePreviewOptions = {
+  baseUrl?: string
+}
+
 function resolveBaseUrl() {
   if (process.env.NEXT_PUBLIC_BASE_URL) {
     return process.env.NEXT_PUBLIC_BASE_URL
@@ -22,8 +26,9 @@ function resolveBaseUrl() {
   return 'http://localhost:4000'
 }
 
-export async function createSharePreviewImage(size: SharePreviewSize) {
-  const imageUrl = new URL('/Figure 1A 2025/BorrowedShade_lowres.jpg', resolveBaseUrl()).toString()
+export async function createSharePreviewImage(size: SharePreviewSize, options: SharePreviewOptions = {}) {
+  const baseUrl = options.baseUrl ?? resolveBaseUrl()
+  const imageUrl = new URL('/Figure 1A 2025/BorrowedShade_lowres.jpg', baseUrl).toString()
 
   return new ImageResponse(
     (
