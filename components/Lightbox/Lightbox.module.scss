@@ -394,6 +394,11 @@
     padding: 12px;
     border-radius: 16px;
     max-height: calc(100vh - 140px);
+    cursor: default; /* Don't show zoom-in cursor on mobile */
+  }
+
+  .imageContainer .image {
+    cursor: default; /* Don't show zoom-in cursor on mobile */
   }
 
   .imageContainerZoomed {

@@ -454,6 +454,11 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
     (event: MouseEvent<HTMLImageElement>) => {
       event.stopPropagation();
 
+      // On small screens, don't allow click-to-zoom (allow native browser zoom instead)
+      if (isMobileViewport) {
+        return;
+      }
+
       if (!isZoomed) {
         // Zoom in when clicking the image
         if (fullWidthZoomTarget > MIN_ZOOM) {
@@ -469,7 +474,7 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
       // If already zoomed, center the image
       centerImage();
     },
-    [fullWidthZoomTarget, handleZoomInput, isZoomed, centerImage, zoomLevel],
+    [fullWidthZoomTarget, handleZoomInput, isZoomed, centerImage, zoomLevel, isMobileViewport],
   );
 
   useEffect(() => {
