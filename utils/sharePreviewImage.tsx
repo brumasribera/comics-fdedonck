@@ -80,7 +80,7 @@ export async function createSharePreviewImage(size: SharePreviewSize, options: S
               display: 'flex',
               alignItems: 'center',
               gap: 14,
-              fontSize: 12,
+              fontSize: 18,
               letterSpacing: '0.4em',
               textTransform: 'uppercase',
               color: 'rgba(255, 255, 255, 0.75)',
@@ -100,7 +100,7 @@ export async function createSharePreviewImage(size: SharePreviewSize, options: S
           {/* Title */}
           <h1
             style={{
-              fontSize: 72,
+              fontSize: 110,
               color: '#ffffff',
               lineHeight: 1.05,
               textTransform: 'uppercase',
@@ -115,7 +115,7 @@ export async function createSharePreviewImage(size: SharePreviewSize, options: S
           {/* Subtitle */}
           <p
             style={{
-              fontSize: 22,
+              fontSize: 32,
               color: 'rgba(255, 255, 255, 0.9)',
               fontWeight: 400,
               margin: 0,
@@ -136,7 +136,7 @@ export async function createSharePreviewImage(size: SharePreviewSize, options: S
               marginTop: 12,
               paddingTop: 8,
               paddingBottom: 8,
-              fontSize: 14,
+              fontSize: 20,
               letterSpacing: '0.32em',
               textTransform: 'uppercase',
               fontWeight: 600,

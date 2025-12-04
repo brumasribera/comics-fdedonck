@@ -72,6 +72,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {process.env.NEXT_PUBLIC_FB_APP_ID && (
           <meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FB_APP_ID} />
         )}
+        {/* Explicit Open Graph image dimensions to encourage large image display */}
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
         <link rel="preload" href="/Figure 1A 2025/BorrowedShade_placeholder.jpg" as="image" fetchPriority="high" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
