@@ -8,6 +8,17 @@ A professional portfolio website showcasing science and storytelling comics at t
 
 ---
 
+## 📑 Table of Contents
+
+- [About This Project](#-about-this-project)
+- [✨ Adding New Content](#-adding-new-content) - **Start here if you want to add comics!**
+- [Explore the Collections](#-explore-the-collections)
+- [Project Documentation](#-project-documentation)
+- [Tech Stack & Features](#-tech-stack--features)
+- [Contact & Collaboration](#-contact--collaboration)
+
+---
+
 ## 📖 About This Project
 
 This portfolio is a growing collection of comics that make the invisible visible. Each piece combines rigorous research with artistic expression to create accessible and impactful visual narratives exploring complex topics ranging from climate science and social justice to personal reflections.
@@ -22,6 +33,24 @@ This portfolio is a growing collection of comics that make the invisible visible
 
 ---
 
+## ✨ Adding New Content
+
+**Want to add new comics to your portfolio?**
+
+👉 **[Read the Full Tutorial →](./README-TUTORIAL.md)**
+
+The tutorial covers everything you need to know:
+- 📥 Installing Cursor (AI-powered editor)
+- 🔧 Setting up the project
+- 📸 Adding new images and comics
+- 🤖 Using Cursor's AI to automate the work
+- 📤 Pushing changes to GitHub
+- 🚀 Checking Vercel deployments
+
+**Quick Start:** Place your image files in the root collection folders, then use Cursor's AI (`Cmd+K`) to add them to your portfolio automatically!
+
+---
+
 ## 🎨 Explore the Collections
 
 ### [**Figure 1A 2025**](#figure-1a-2025)
@@ -29,6 +58,8 @@ This portfolio is a growing collection of comics that make the invisible visible
 
 - **Silent Robber**: Visual reflections on glacial erosion, landscapes, and the stories hidden beneath the ice.
 - **Borrowed Shade**: Urban heat islands and social inequalities in cities.
+
+📖 [Read more about Figure 1A 2025](./Figure%201A%202025/README.md)
 
 ### [**No Plane Adventures**](#no-plane-adventures)
 A series of short comics from sustainable travels without taking the airplane.
@@ -42,70 +73,40 @@ A collection of standalone stories:
 - **al-Ard (فلسطين)**: Reflections on land, loss, and solidarity
 - **Line 3 replacement**: A story of water protectors and care for Earth
 
+📖 [Read more about Other Comics](./Other%20comics/README.md)
+
 ### [**Posters**](#posters)
 Artistic posters made as gifts, capturing special moments and places.
 
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18+ and npm
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/brumasribera/comics-fdedonck.git
-cd comics-fdedonck
-
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Build for Production
-
-```bash
-npm run build
-npm start
-```
+📖 [Read more about Posters](./Posters/README.md)
 
 ---
 
-## 🚢 Deployment
+## 📚 Project Documentation
 
-This project is optimized for deployment on **Vercel** (free tier available).
+### For Visitors & General Public
 
-### Deploy to Vercel
+- **[Figure 1A 2025/README.md](./Figure%201A%202025/README.md)** - Details about the Figure 1A collection
+- **[Other comics/README.md](./Other%20comics/README.md)** - Details about standalone comics
+- **[Posters/README.md](./Posters/README.md)** - Details about poster artwork
 
-1. **Push to GitHub** (if not already done)
-   ```bash
-   git push origin main
-   ```
+### For Content Management
 
-2. **Import to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "Add New Project"
-   - Import your GitHub repository
-   - Vercel will automatically detect Next.js
-   - Click "Deploy"
+- **👉 [README-TUTORIAL.md](./README-TUTORIAL.md)** - **Complete step-by-step guide:**
+  - Installing Cursor editor (macOS)
+  - Cloning the repository
+  - Adding new images and comics using Cursor's AI
+  - Using Git to push changes
+  - Checking Vercel deployments
+  - Troubleshooting tips
 
-3. **That's it!** Your site will be live in minutes with:
-   - Automatic SSL certificates
-   - Global CDN
-   - Automatic deployments on every push
-
-For detailed deployment instructions, see [README-DEPLOYMENT.md](./README-DEPLOYMENT.md).
+- **[README-DEPLOYMENT.md](./README-DEPLOYMENT.md)** - Detailed deployment guide
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & Features
+
+### Tech Stack
 
 - **[Next.js 14](https://nextjs.org/)** - React framework with App Router
 - **[React 18](https://react.dev/)** - UI library
@@ -113,40 +114,7 @@ For detailed deployment instructions, see [README-DEPLOYMENT.md](./README-DEPLOY
 - **Next.js Image Optimization** - Automatic image optimization
 - **Vercel** - Hosting and deployment platform
 
----
-
-## 📁 Project Structure
-
-```
-comics-fdedonck/
-├── app/                    # Next.js App Router
-│   ├── layout.jsx         # Root layout with metadata
-│   ├── page.jsx           # Home page
-│   └── globals.css        # Global styles and CSS variables
-├── components/             # React components
-│   ├── Header.jsx         # Navigation header
-│   ├── Hero.jsx           # Hero section
-│   ├── Collections.jsx    # Collections container
-│   ├── CollectionCard.jsx # Individual collection cards
-│   ├── Lightbox.jsx       # Image lightbox modal
-│   └── About.jsx          # About and contact section
-├── public/                 # Static assets
-│   ├── Figure 1A 2025/    # Figure 1A collection images
-│   ├── No Plane Adventures/ # Travel comics
-│   ├── Other comics/      # Standalone comics
-│   └── Posters/           # Poster artwork
-├── Figure 1A 2025/         # Original source files
-├── No Plane Adventures/    # Original source files
-├── Other comics/          # Original source files
-├── Posters/               # Original source files
-└── next.config.js         # Next.js configuration
-```
-
-> **Note**: The original comic files are preserved in the root directories. The `public/` folder contains copies used by the Next.js application.
-
----
-
-## 🎨 Features
+### Features
 
 - ✨ **Modern, Responsive Design** - Beautiful UI that works on all devices
 - 🖼️ **Image Lightbox Gallery** - Click any comic to view in full-screen
@@ -155,51 +123,6 @@ comics-fdedonck/
 - 📱 **Mobile-First** - Designed for mobile, tablet, and desktop
 - 🔍 **SEO-Friendly** - Proper metadata and semantic HTML
 - ♿ **Accessible** - Follows web accessibility best practices
-
----
-
-## 🔧 Customization
-
-### Update Content
-
-Edit collection data in `components/Collections.jsx`:
-
-```jsx
-const collections = [
-  {
-    id: 'your-collection',
-    title: 'Your Collection',
-    subtitle: 'Subtitle here',
-    description: 'Description here',
-    items: [
-      {
-        title: 'Comic Title',
-        description: 'Comic description',
-        image: '/path/to/image.jpg',
-        fullImage: '/path/to/full-image.jpg'
-      }
-    ]
-  }
-]
-```
-
-### Customize Styling
-
-Edit CSS variables in `app/globals.css`:
-
-```css
-:root {
-  --primary-color: #1a1a1a;
-  --accent-color: #d4af37;
-  /* ... more variables */
-}
-```
-
-### Add New Images
-
-1. Add images to the appropriate folder in `public/`
-2. Update the collection data in `components/Collections.jsx`
-3. Images will be automatically optimized by Next.js
 
 ---
 
