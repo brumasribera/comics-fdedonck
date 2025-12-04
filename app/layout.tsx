@@ -13,11 +13,9 @@ const siteMetadata = {
   imageAlt: 'Fien De Doncker — Comics portfolio share preview',
 };
 
-// Use dynamic opengraph-image route for better WhatsApp/Facebook compatibility
-const OG_IMAGE_PATH = '/opengraph-image';
-// Append a version so Meta/WhatsApp re-fetch the image after new deployments.
-const ogImageVersion = process.env.NEXT_PUBLIC_BUILD_ID ? `?v=${process.env.NEXT_PUBLIC_BUILD_ID}` : '';
-const ogImageUrl = new URL(`${OG_IMAGE_PATH}${ogImageVersion}`, siteMetadata.url).toString();
+// Use static opengraph-image.jpg file
+const OG_IMAGE_PATH = '/opengraph-image.jpg';
+const ogImageUrl = new URL(OG_IMAGE_PATH, siteMetadata.url).toString();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.url),
@@ -46,7 +44,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: siteMetadata.imageAlt,
-        type: 'image/png',
+        type: 'image/jpeg',
       },
     ],
   },
@@ -75,7 +73,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Explicit Open Graph image dimensions to encourage large image display */}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:type" content="image/jpeg" />
         <link rel="preload" href="/Figure 1A 2025/BorrowedShade_placeholder.jpg" as="image" fetchPriority="high" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
