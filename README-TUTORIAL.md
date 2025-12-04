@@ -13,11 +13,11 @@ Quick guide to adding comics using Cursor's AI. **Place files in root folders, t
 
 ### Step 2: Clone the Repository
 
-1. Press `Cmd+K` in Cursor
-2. Copy and paste this prompt:
+1. **On Cursor's startup screen**, click the **"Clone repo"** button
+2. Paste this repository URL:
 
 ```
-Clone this repository to my project: https://github.com/fdedonck/comics-fdedonck.git
+https://github.com/fdedonck/comics-fdedonck.git
 ```
 
 3. Select where to save the project when prompted
@@ -115,17 +115,32 @@ git push origin main
 
 ---
 
-## 🚀 Checking Vercel Deployments
+## 🚀 Deployment
 
-1. Go to [vercel.com](https://vercel.com) and sign in
-2. Click on your project (comics-fdedonck)
-3. Check the latest deployment status:
-   - **Building** (yellow) - Still deploying
-   - **Ready** (green) - Live!
-   - **Error** (red) - Click to see details
-4. Click "Visit" to see your live site
+When you push to GitHub, the server automatically updates based on your last commit.
 
-> 💡 Deployments take 1-3 minutes after pushing to GitHub.
+**After pushing:**
+- The server should update automatically after about 1 minute
+- If there's an error, check for build issues
+
+**If deployment fails:**
+
+1. **Test the build locally** - Open terminal (`Cmd+` `) and run:
+   ```bash
+   npm run build
+   ```
+
+2. **Fix any errors** that appear
+   - Ask Cursor (`Cmd+K`) to help fix build errors if needed
+
+3. **Commit and push again:**
+   ```bash
+   git add .
+   git commit -m "Fix build errors"
+   git push origin main
+   ```
+
+> 💡 **Remember**: Pushing to GitHub automatically triggers a server update on your last commit. Always test with `npm run build` before pushing to avoid errors!
 
 ---
 
