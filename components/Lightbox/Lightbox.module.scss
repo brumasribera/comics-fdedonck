@@ -398,6 +398,7 @@
 
   .imageContainerZoomed {
     max-height: calc(100vh - 100px);
+    padding-top: 60px; /* Ensure top of image is visible below close button */
   }
 
   .controls {

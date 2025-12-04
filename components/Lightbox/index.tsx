@@ -95,12 +95,12 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
               ? Math.max(0, (scrollWidth - clientWidth) / 2)
               : 0;
             
-            // On small screens, ensure top is visible (start from top)
+            // On small screens, ensure top is visible (padding-top handles close button clearance)
             // On larger screens, center vertically
             let scrollTop: number;
             if (isMobileViewport) {
-              // On mobile, scroll to top to ensure top part is visible
-              // Leave minimal offset to account for close button
+              // On mobile, padding-top ensures image starts below close button
+              // Scroll to top to show the image content
               scrollTop = 0;
             } else {
               scrollTop = scrollHeight > clientHeight
