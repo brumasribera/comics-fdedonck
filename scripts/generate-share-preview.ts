@@ -1,33 +1,23 @@
-import { writeFile } from 'node:fs/promises';
-import path from 'node:path';
+import path from 'node:path'
 
-import { createSharePreviewImage } from '../utils/sharePreviewImage';
+import sharp from 'sharp'
 
-type TargetSpec = {
-  size: { width: number; height: number };
-  filename: string;
-};
-
-const targets: TargetSpec[] = [
-  { size: { width: 1200, height: 630 }, filename: 'opengraph-image.png' },
-  { size: { width: 1200, height: 600 }, filename: 'twitter-image.png' },
-];
+const OUTPUT_SIZE = { width: 1200, height: 630 }
+const SOURCE_IMAGE = path.resolve(process.cwd(), 'public', 'Figure 1A 2025', 'BorrowedShade_lowres.jpg')
+const TARGET_PATH = path.resolve(process.cwd(), 'public', 'og-cover.jpg')
 
 async function generate() {
-  for (const target of targets) {
-    const response = await createSharePreviewImage(target.size);
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    const outputPath = path.resolve(process.cwd(), 'public', target.filename);
+  await sharp(SOURCE_IMAGE)
+    .resize(OUTPUT_SIZE.width, OUTPUT_SIZE.height, { fit: 'cover' })
+    .jpeg({ quality: 90 })
+    .toFile(TARGET_PATH)
 
-    await writeFile(outputPath, buffer);
-    console.log(`[share-preview] Saved ${target.filename}`);
-  }
+  console.log('[share-preview] Saved og-cover.jpg')
 }
 
 generate().catch((error) => {
-  console.error('Failed to generate share preview image');
-  console.error(error);
-  process.exit(1);
-});
+  console.error('Failed to generate share preview image')
+  console.error(error)
+  process.exit(1)
+})
 
