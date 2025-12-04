@@ -90,13 +90,23 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
 
           // Check if dimensions are valid and there's scrollable content
           if (scrollWidth > 0 && scrollHeight > 0 && (scrollWidth > clientWidth || scrollHeight > clientHeight)) {
-            // Calculate center position to center the image in the viewport
+            // Calculate center position to center the image in the viewport horizontally
             const scrollLeft = scrollWidth > clientWidth
               ? Math.max(0, (scrollWidth - clientWidth) / 2)
               : 0;
-            const scrollTop = scrollHeight > clientHeight
-              ? Math.max(0, (scrollHeight - clientHeight) / 2)
-              : 0;
+            
+            // On small screens, ensure top is visible (start from top)
+            // On larger screens, center vertically
+            let scrollTop: number;
+            if (isMobileViewport) {
+              // On mobile, scroll to top to ensure top part is visible
+              // Leave minimal offset to account for close button
+              scrollTop = 0;
+            } else {
+              scrollTop = scrollHeight > clientHeight
+                ? Math.max(0, (scrollHeight - clientHeight) / 2)
+                : 0;
+            }
 
             // Set scroll position directly (instant)
             container.scrollLeft = scrollLeft;
@@ -110,7 +120,7 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
     };
 
     attemptCenter();
-  }, []);
+  }, [isMobileViewport]);
 
   const resetZoomLevel = useCallback(() => {
     setZoomLevel(MIN_ZOOM);
