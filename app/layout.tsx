@@ -6,14 +6,15 @@ import './globals.css';
 const siteMetadata = {
   title: 'Fien De Doncker — Comics Portfolio | Science & Social Justice',
   ogTitle: 'Fien De Doncker — Comics Portfolio',
+  ogDescription: 'Science, art, and storytelling comics for climate action.',
   description:
     'Science, art, and storytelling comics at the intersection of research, art, and social justice. Visual narratives translating data and lived realities into bold stories for climate action.',
   url: 'https://comics-fdedonck.vercel.app/',
   imageAlt: 'Fien De Doncker — Comics portfolio share preview',
 };
 
-// Update this path when you swap out the JPG located in /public.
-const OG_IMAGE_PATH = '/og-cover.jpg';
+// Use dynamic opengraph-image route for better WhatsApp/Facebook compatibility
+const OG_IMAGE_PATH = '/opengraph-image';
 // Append a version so Meta/WhatsApp re-fetch the image after new deployments.
 const ogImageVersion = process.env.NEXT_PUBLIC_BUILD_ID ? `?v=${process.env.NEXT_PUBLIC_BUILD_ID}` : '';
 const ogImageUrl = new URL(`${OG_IMAGE_PATH}${ogImageVersion}`, siteMetadata.url).toString();
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: siteMetadata.url,
     title: siteMetadata.ogTitle,
-    description: siteMetadata.description,
+    description: siteMetadata.ogDescription,
     siteName: 'Fien De Doncker',
     locale: 'en_US',
     images: [
@@ -39,14 +40,14 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: siteMetadata.imageAlt,
-        type: 'image/jpeg',
+        type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteMetadata.title,
-    description: siteMetadata.description,
+    title: siteMetadata.ogTitle,
+    description: siteMetadata.ogDescription,
     images: [
       {
         url: ogImageUrl,
@@ -62,6 +63,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {process.env.NEXT_PUBLIC_FB_APP_ID && (
+          <meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FB_APP_ID} />
+        )}
         <link rel="preload" href="/Figure 1A 2025/BorrowedShade_placeholder.jpg" as="image" fetchPriority="high" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
