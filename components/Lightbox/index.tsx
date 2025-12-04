@@ -551,31 +551,35 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
               ‹
             </button>
           )}
-          <button
-            type="button"
-            className={classNames(styles.zoomButton, styles.zoomButtonMinus)}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleZoomStep('out');
-            }}
-            disabled={!zoomControlsEnabled || zoomLevel <= MIN_ZOOM}
-            aria-label="Zoom out"
-          >
-            <span aria-hidden="true" className={styles.zoomIcon} />
-          </button>
-          <div className={styles.zoomDivider} />
-          <button
-            type="button"
-            className={classNames(styles.zoomButton, styles.zoomButtonPlus)}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleZoomStep('in');
-            }}
-            disabled={!zoomControlsEnabled || zoomLevel >= maxZoom}
-            aria-label="Zoom in"
-          >
-            <span aria-hidden="true" className={styles.zoomIcon} />
-          </button>
+          {!isMobileViewport && (
+            <>
+              <button
+                type="button"
+                className={classNames(styles.zoomButton, styles.zoomButtonMinus)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleZoomStep('out');
+                }}
+                disabled={!zoomControlsEnabled || zoomLevel <= MIN_ZOOM}
+                aria-label="Zoom out"
+              >
+                <span aria-hidden="true" className={styles.zoomIcon} />
+              </button>
+              <div className={styles.zoomDivider} />
+              <button
+                type="button"
+                className={classNames(styles.zoomButton, styles.zoomButtonPlus)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleZoomStep('in');
+                }}
+                disabled={!zoomControlsEnabled || zoomLevel >= maxZoom}
+                aria-label="Zoom in"
+              >
+                <span aria-hidden="true" className={styles.zoomIcon} />
+              </button>
+            </>
+          )}
           {hasMultiple && (
             <button
               className={classNames(styles.navButton, styles.navButtonRight)}
