@@ -44,10 +44,17 @@ export default function PreviewPage() {
       <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">Share preview</p>
       <h1 className="text-4xl font-semibold text-neutral-900">{previewTitle}</h1>
       <p className="text-lg leading-relaxed text-neutral-700">{previewDescription}</p>
-      <figure className="overflow-hidden rounded-3xl border border-neutral-200 shadow-xl">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={previewImagePath} alt="Preview of the comics portfolio share card" className="w-full" />
-        <figcaption className="bg-neutral-50 px-4 py-3 text-sm text-neutral-600">
+      <figure className="w-full">
+        <div className="overflow-auto rounded-3xl border border-neutral-200 shadow-xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src={previewImagePath} 
+            alt="Preview of the comics portfolio share card" 
+            className="w-full h-auto block"
+            style={{ minWidth: '100%', height: 'auto' }}
+          />
+        </div>
+        <figcaption className="bg-neutral-50 px-4 py-3 text-sm text-neutral-600 mt-0 rounded-b-3xl">
           This is the exact artwork WhatsApp and other Open Graph scrapers will pull.
         </figcaption>
       </figure>

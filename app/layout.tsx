@@ -23,6 +23,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.url),
   title: siteMetadata.title,
   description: siteMetadata.description,
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   icons: {
     icon: '/favicon.png',
   },
